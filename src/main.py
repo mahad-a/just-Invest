@@ -1,5 +1,3 @@
-import pandas
-
 MENU_AND_ROLE = {
     "Client": ["View account balance", "View investment portfolio", "View Finanical Advisor contact info"],
     "Premium Client": ["Modify investment portfolio", "View Finanical Planner contact"],
@@ -14,9 +12,15 @@ def justInvest(user_role):
         print(f" {idx}. {option}")
 
 def load_sample_users(filename):
-    sample_df = pandas.read_csv(filename, sep=",")
-    sample_df.columns = ["Name", "Role"]
-    return sample_df
+    users = []
+    with open(filename, 'r') as file:
+        for line in file:
+            name, role = line.strip().split(',')
+            users.append({
+                "Name": name, 
+                "Role": role
+            })
+    return users
 
 def access_permission(user_role, action):
     return action in MENU_AND_ROLE.get(user_role)
@@ -24,5 +28,6 @@ def access_permission(user_role, action):
 
 if __name__ == "__main__":
     justInvest("Client")
-    df = load_sample_users('docs/sample.txt')
-    # print(df.head)
+    users = load_sample_users('docs/sample.txt')
+    for user in users:
+        print(user)

@@ -1,24 +1,34 @@
-def assign_role(user_input):
-    if user_input == "1":
-        return "Client"
-    elif user_input == "2":
-        return "Premium Client"
-    elif user_input == "3":
-        return "Financial Advisor"
-    elif user_input == "4":
-        return "Financial Planner"
-    elif user_input == "5":
-        return "Teller"
-    else: # if user fails to provide a proper input
-        return "Client"
+import re
 
-## example of menu and inputs (for later implementation)
-# print("Choose your role:")
-# print("1. Client")
-# print("2. Premium Client")
-# print("3. Financial Advisor")
-# print("4. Financial Planner")
-# print("5. Teller")
+def is_password_valid(username: str, password: str):
+    if password == username:
+        print("Password cannot be the same as username")
+        return False
+    
+    if not (8 <= len(password) <= 12):
+        print(f"Password must be between 8 and 12 characters long, your password is: {len(password)}")
+        return False
+    
+    if not re.search(r'[A-Z]', password):  
+        print("Password must contain at least one uppercase letter.")
+        return False
+    if not re.search(r'[a-z]', password):  
+        print("Password must contain at least one lowercase letter.")
+        return False
+    if not re.search(r'\d', password): 
+        print("Password must contain at least one digit.")
+        return False
+    if not re.search(r'[!@#$%*&]', password): 
+        print("Password must contain at least one special character from (!, @, #, $, %, *, &).")
+        return False
 
-# user_choice = input("Enter the number corresponding to your role: ")
-# user_role = assign_role(user_choice)
+    print("Password Valid!")
+    return True 
+
+# Test the function
+user = "mahad"
+is_password_valid(user, "mahad")        # Password == username (should fail)
+is_password_valid(user, "mahad123")     # Missing special char (should fail)
+is_password_valid(user, "mahad123!!")   # Valid password (should pass)
+is_password_valid(user, "Mahad")        # Missing digits (should fail)
+is_password_valid(user, "Mahad123!!")   # Valid password (should pass)
