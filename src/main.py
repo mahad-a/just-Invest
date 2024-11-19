@@ -26,6 +26,13 @@ def load_sample_users(filename):
 
 def access_permission(user_role, action):
     return action in MENU_AND_ROLE.get(user_role)
+
+def encrypt_password(username: str, password: str):
+    password_byte = password.encode("utf-8") # encode password in bytes
+    hash_result = bcrypt.hashpw(password_byte, bcrypt.gensalt(rounds=10)) # hash the password and add salt
+    with open("passwd.txt", 'a') as file:
+        file.write("Username: %s, Password: %d" % (username, hash_result))
+    return bcrypt.checkpw(password_byte, hash_result)
     
 
 if __name__ == "__main__":
@@ -34,9 +41,5 @@ if __name__ == "__main__":
     for user in users:
         print(user)
     print("-"*50)
-    password_example = input("Password: ")
-    password_byte = password_example.encode("utf-8")
-    hash = bcrypt.hashpw(password_byte, bcrypt.gensalt())
-    print(hash)
-    print(hash.decode("utf-8"))
-    print(bcrypt.checkpw(password_byte, hash))
+    # password_example = input("Password: ")
+    
