@@ -1,3 +1,5 @@
+import bcrypt
+
 MENU_AND_ROLE = {
     "Client": ["View account balance", "View investment portfolio", "View Finanical Advisor contact info"],
     "Premium Client": ["Modify investment portfolio", "View Finanical Planner contact"],
@@ -31,3 +33,10 @@ if __name__ == "__main__":
     users = load_sample_users('docs/sample.txt')
     for user in users:
         print(user)
+    print("-"*50)
+    password_example = input("Password: ")
+    password_byte = password_example.encode("utf-8")
+    hash = bcrypt.hashpw(password_byte, bcrypt.gensalt())
+    print(hash)
+    print(hash.decode("utf-8"))
+    print(bcrypt.checkpw(password_byte, hash))
