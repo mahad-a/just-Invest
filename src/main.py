@@ -93,6 +93,65 @@ def encrypt_password(password: str):
     if bcrypt.checkpw(password_byte, hash_result):
         return hash_result
 
+def sign_up():
+    # while True:
+    print("-"*50)
+    print("Sign up: ")
+    name = input("Enter your name: ")
+    for available_roles in MENU_AND_ROLE.keys():
+        print(f"- {available_roles}")
+    role = input("Enter your role: ")
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
 
+    if is_password_valid(username, password) and is_role_valid(role):
+        hashed_password = encrypt_password(password)
+        with open(PASSWORDS, 'a') as password_file:
+            password_file.write("Name: %s, Username: %s, Role: %s, Password: %s" % (name.title(), username, role.title(), hashed_password.decode("utf-8")))
+            justInvest(role.title())
+            # break
+    else:
+        print("One of the inputted values were not a valid input.")
+    print("-"*50)
+
+def log_in():
+    print("-"*50)
+    print("Log in: ")
+    
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
+    with open(PASSWORDS, "r") as file:
+        content = file.read()
+        stored_name = content.split(',')[0].split(':')[1].strip()
+        stored_username = content.split(',')[1].split(':')[1].strip()
+        stored_role = content.split(',')[2].split(':')[1].strip()
+        stored_password_hash = content.split(',')[3].split(':')[1].strip()
+
+        if username == stored_username:
+            if bcrypt.checkpw(password.encode("utf-8"), stored_password_hash.encode("utf-8")):
+                print("Login successful! Welcome %s" % stored_name)
+                justInvest(stored_role)
+                return
+            else:
+                print("Incorrect password.")
+    print("Username not found.")
+    return
+
+
+if __name__ == "__main__":
+    print("-" * 50)
+    print("Main Menu")
+    while True:
+        print("1. Sign up \n2. Log in ")
+        choice = input("Enter your choice (1, 2): ")
+
+        if choice == "1":
+            sign_up()
+            break
+        elif choice == "2":
+            log_in()
+            break
+        else:
+            print("Invalid Input, try again. ")
 
         
