@@ -75,16 +75,17 @@ def encrypt_password(password: str):
         return hash_result
     
 
-# def sign_up():
-#     print("Sign up: ")
-#     name = input("Enter your name: ")
-#     role = input("Enter your role: ")
-#     username = input("Enter your username: ")
-#     password = input("Enter your password: ")
+def sign_up():
+    print("Sign up: ")
+    name = input("Enter your name: ")
+    role = input("Enter your role: ")
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
 
-#     if is_role_valid(role):
-#         encrypt_password(password)
-#         with open(PASSWORDS, 'a') as password_file:
+    if is_role_valid(role):
+        encrypt_password(password)
+        with open(PASSWORDS, 'a') as password_file:
+            password_file.write("Username: %s, Password: %s" % (username, ))
 
 
 
@@ -95,7 +96,7 @@ if __name__ == "__main__":
     #     print(user)
     # print("-"*50)
 
-    password = "hassan"
+    password = "test"
     encrypt_password(password)
 
     # username = input("Enter Username: ")
