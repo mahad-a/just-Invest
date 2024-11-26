@@ -12,6 +12,21 @@ MENU_AND_ROLE = {
 SAMPLE = "docs/sample.txt"
 PASSWORDS = "docs/passwd.txt"
 
+class User:
+    def __init__(self, name, username, role):
+        self.name = name
+        self.username = username
+        self.role = role
+    
+    def get_name(self):
+        return self.name
+    
+    def get_username(self):
+        return self.username
+    
+    def get_role(self):
+        return self.role
+
 def is_password_valid(username: str, password: str):
     if password == username:
         print("Password cannot be the same as username")
@@ -38,12 +53,16 @@ def is_password_valid(username: str, password: str):
     return True 
 
 def is_role_valid(role: str):
-    if MENU_AND_ROLE.get(role) != None:
+    case_insensitive = {key.lower(): value for key, value in MENU_AND_ROLE.items()}
+    if case_insensitive.get(role) != None:
+        print("Given role is a valid role")
         return True
     else:
+        print("Given role is not a valid role")
         return False
 
 def justInvest(user_role):
+
     print("justInvest System\n", "-"*50, "\nOperations available on the system:")
     for idx, option in enumerate(MENU_AND_ROLE.get(user_role), start=1):
         print(f" {idx}. {option}")
@@ -73,39 +92,7 @@ def encrypt_password(password: str):
     #     file.write("Username: %s, Password: %d" % (username, hash_result))
     if bcrypt.checkpw(password_byte, hash_result):
         return hash_result
-    
-
-def sign_up():
-    print("Sign up: ")
-    name = input("Enter your name: ")
-    role = input("Enter your role: ")
-    username = input("Enter your username: ")
-    password = input("Enter your password: ")
-
-    if is_role_valid(role):
-        encrypt_password(password)
-        with open(PASSWORDS, 'a') as password_file:
-            password_file.write("Username: %s, Password: %s" % (username, ))
 
 
 
-if __name__ == "__main__":
-    # justInvest("Client")
-    # users = load_sample_users('docs/sample.txt')
-    # for user in users:
-    #     print(user)
-    # print("-"*50)
-
-    password = "test"
-    encrypt_password(password)
-
-    # username = input("Enter Username: ")
-    # password = input("Enter Password: ")
-    # # Test the function
-    # user = "mahad"
-    # is_password_valid(user, "mahad")        # Password == username (should fail)
-    # is_password_valid(user, "mahad123")     # Missing special char (should fail)
-    # is_password_valid(user, "mahad123!!")   # Valid password (should pass)
-    # is_password_valid(user, "Mahad")        # Missing digits (should fail)
-    # is_password_valid(user, "Mahad123!!")   # Valid password (should pass)
-    
+        
