@@ -1,1 +1,2 @@
-Name: Mahad, Username: mahadahmed3, Role: Financial Advisor, Password: $2b$10$CIEHJPJqgf6e4L.0AMps0u1IFp/rv4uOMzzp9QL.G9TQosynBPkzm
+Name: Test, Username: tester, Role: Teller, Password: $2b$10$e1rRkP4UFhMIkCW7lx4P5OFefXeAp2HKRVVi54AopmX690GzH76HC
+Name: Mahad, Username: mahadahmed3, Role: Financial Planner, Password: $2b$10$uAP9L.euk2iyUU6t.a6IY.xo2.pclwUE4WsWLtWoXbNAYZVvWxw7i
