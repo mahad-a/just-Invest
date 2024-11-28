@@ -75,6 +75,15 @@ def is_role_valid(role: str):
         print("Given role is not a valid role")
         return False
 
+def is_username_valid(username: str):
+    with open(PASSWORDS, 'r') as file:
+        for line in file:
+            stored_username = line.split(',')[1].strip()
+            print(stored_username)
+            print(username)
+            if stored_username == username:
+                return False
+    return True
 
 def can_access(user_role, action):
     if user_role == "Teller" and not is_business_hours():

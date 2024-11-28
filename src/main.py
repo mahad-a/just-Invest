@@ -26,7 +26,6 @@ def encrypt_password(password: str):
         return hash_result
 
 def sign_up():
-    # while True:
     print("-"*50, "\nSign up: ")
     name = input("Enter your name: ")
     for available_roles in MENU_AND_ROLE.keys():
@@ -35,12 +34,11 @@ def sign_up():
     username = input("Enter your username: ")
     password = getpass.getpass("Enter your password (Hidden for security): ")
 
-    if is_password_valid(username, password) and is_role_valid(role):
+    if is_password_valid(username, password) and is_role_valid(role) and is_username_valid(username):
         hashed_password = encrypt_password(password)
         with open(PASSWORDS, 'a') as password_file:
-            password_file.write("Name: %s, Username: %s, Role: %s, Password: %s\n" % (name.title(), username, role.title(), hashed_password.decode("utf-8")))
+            password_file.write("%s,%s,%s,%s\n" % (name.title(), username, role.title(), hashed_password.decode("utf-8")))
             justInvestMenu(role.title())
-            # break
     else:
         print("One of the inputted values were not a valid input.")
 
