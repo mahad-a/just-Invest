@@ -1,0 +1,71 @@
+from constants import *
+from checkers import *
+from Problem2 import *
+from Problem1 import justInvestMenu
+
+import getpass
+
+# password checker
+def is_password_valid(username: str, password: str):
+    if password == username:
+        print("Password cannot be the same as username")
+        return False
+    elif not (8 <= len(password) <= 12):
+        print(f"Password must be between 8 and 12 characters long, your password is: {len(password)}")
+        return False
+    elif not re.search("[A-Z]", password):  
+        print("Password must contain at least one uppercase letter.")
+        return False
+    elif not re.search("[a-z]", password):  
+        print("Password must contain at least one lowercase letter.")
+        return False
+    elif not re.search("\d", password): 
+        print("Password must contain at least one digit.")
+        return False
+    elif not re.search("[!@#$%*&]", password): 
+        print("Password must contain at least one special character from (!, @, #, $, %, *, &).")
+        return False
+    else:
+        print("Password Valid!")
+        return True 
+
+# check if role exists
+def is_role_valid(role: str):
+    case_insensitive = {key.lower(): value for key, value in MENU_AND_ROLE.items()}
+    if case_insensitive.get(role) != None:
+        print("Given role is a valid role")
+        return True
+    else:
+        print("Given role is not a valid role")
+        return False
+
+# check if the given username already exists in the passwords file
+def is_username_valid(username: str):
+    with open(PASSWORDS, 'r') as file:
+        for line in file:
+            stored_username = line.split(',')[1].strip()
+            print(stored_username)
+            print(username)
+            if stored_username == username:
+                return False
+    return True
+
+
+def sign_up(): # sign up user interface
+    print("-"*50, "\nSign up: ")
+    name = input("Enter your name: ")
+    for available_roles in MENU_AND_ROLE.keys():
+        print(f"- {available_roles}")
+    role = input("Enter your role: ")
+    username = input("Enter your username: ")
+    # hidden password input
+    password = getpass.getpass("Enter your password (Hidden for security): ")
+
+    # proactive password checker, alongside checks for username duplicates and role is a real role
+    if is_password_valid(username, password) and is_role_valid(role) and is_username_valid(username):
+        hashed_password = encrypt_password(password) # encrypt the new password by hashing and salting
+        with open(PASSWORDS, 'a') as password_file: # add to password file
+            password_file.write("%s,%s,%s,%s\n" % (name.title(), username, role.title(), hashed_password.decode("utf-8")))
+            justInvestMenu(role.title()) # automatically log in after sign up
+    else: # not a proper input for any values 
+        print("One of the inputted values were not a valid input.")
