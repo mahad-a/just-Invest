@@ -1,4 +1,3 @@
-import re
 from datetime import datetime
 
 # RBAC
@@ -39,43 +38,6 @@ ROLE_HIERARCHY = {
     "Financial Planner": ["Financial Advisor"],
 }
 
-# text files
-SAMPLE = "docs/sample.txt"
-PASSWORDS = "docs/passwd.txt"
-
-def is_password_valid(username: str, password: str):
-    if password == username:
-        print("Password cannot be the same as username")
-        return False
-    elif not (8 <= len(password) <= 12):
-        print(f"Password must be between 8 and 12 characters long, your password is: {len(password)}")
-        return False
-    elif not re.search("[A-Z]", password):  
-        print("Password must contain at least one uppercase letter.")
-        return False
-    elif not re.search("[a-z]", password):  
-        print("Password must contain at least one lowercase letter.")
-        return False
-    elif not re.search("\d", password): 
-        print("Password must contain at least one digit.")
-        return False
-    elif not re.search("[!@#$%*&]", password): 
-        print("Password must contain at least one special character from (!, @, #, $, %, *, &).")
-        return False
-    else:
-        print("Password Valid!")
-        return True 
-
-def is_role_valid(role: str):
-    case_insensitive = {key.lower(): value for key, value in MENU_AND_ROLE.items()}
-    if case_insensitive.get(role) != None:
-        print("Given role is a valid role")
-        return True
-    else:
-        print("Given role is not a valid role")
-        return False
-
-
 def can_access(user_role, action):
     if user_role == "Teller" and not is_business_hours():
         return "NO ACCESS OUTSIDE BUSINESS HOURS"
@@ -99,3 +61,24 @@ def process_user_selection(user_input, index):
         else:
             print("Invalid input, try again.")
             user_input = input("Enter your option: ")
+
+def privileges(username, role):
+    access_rights = get_access(role)
+    print(f"Current Session:\nUsername: {username}\nRole: {role}\nAccess Rights: {access_rights}")
+
+def justInvestMenu(user_role):
+    print("justInvest System\n", "-"*50, "\nOperations available on the system:")
+    menu = list(get_access(user_role))
+    menu.append("Log out")
+    for idx, option in enumerate(menu, start=1):
+        print(f" {idx}. {option}")
+    user_input = input("Enter your option: ")
+    result = process_user_selection(user_input, len(menu))
+
+    if result:
+        selection = menu[result-1]
+        if selection == "Log out":
+            print("Logging out...")
+            from main import main_menu
+            main_menu()
+        print("ACCESS GRANTED TO %s" % selection)
