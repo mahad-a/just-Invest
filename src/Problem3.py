@@ -1,9 +1,10 @@
-from constants import *
-from checkers import *
-from Problem2 import *
-from Problem1 import justInvestMenu
+from Problem1 import MENU_AND_ROLE, justInvestMenu, privileges
+from Problem2 import update_password_file
 
 import getpass
+import re
+
+PASSWORDS = "docs/passwd.txt"
 
 # password checker
 def is_password_valid(username: str, password: str):
@@ -14,16 +15,16 @@ def is_password_valid(username: str, password: str):
         print(f"Password must be between 8 and 12 characters long, your password is: {len(password)}")
         return False
     elif not re.search("[A-Z]", password):  
-        print("Password must contain at least one uppercase letter.")
+        print("Password must contain at least one uppercase letter")
         return False
     elif not re.search("[a-z]", password):  
-        print("Password must contain at least one lowercase letter.")
+        print("Password must contain at least one lowercase letter")
         return False
     elif not re.search("\d", password): 
-        print("Password must contain at least one digit.")
+        print("Password must contain at least one digit")
         return False
     elif not re.search("[!@#$%*&]", password): 
-        print("Password must contain at least one special character from (!, @, #, $, %, *, &).")
+        print("Password must contain at least one special character from (!, @, #, $, %, *, &)")
         return False
     else:
         print("Password Valid!")
@@ -44,10 +45,10 @@ def is_username_valid(username: str):
     with open(PASSWORDS, 'r') as file:
         for line in file:
             stored_username = line.split(',')[1].strip()
-            print(stored_username)
-            print(username)
             if stored_username == username:
+                print("Given username is not valid")
                 return False
+    print("Given username is valid!")
     return True
 
 
@@ -63,9 +64,8 @@ def sign_up(): # sign up user interface
 
     # proactive password checker, alongside checks for username duplicates and role is a real role
     if is_password_valid(username, password) and is_role_valid(role) and is_username_valid(username):
-        hashed_password = encrypt_password(password) # encrypt the new password by hashing and salting
-        with open(PASSWORDS, 'a') as password_file: # add to password file
-            password_file.write("%s,%s,%s,%s\n" % (name.title(), username, role.title(), hashed_password.decode("utf-8")))
-            justInvestMenu(role.title()) # automatically log in after sign up
+        update_password_file(username, name, role, password) # adds new user to the password file
+        privileges(username, role.title())
+        justInvestMenu(role.title()) # automatically log in after sign up
     else: # not a proper input for any values 
         print("One of the inputted values were not a valid input.")
