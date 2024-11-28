@@ -7,6 +7,8 @@ def justInvestMenu(user_role):
     print("justInvest System\n", "-"*50, "\nOperations available on the system:")
     for idx, option in enumerate(get_access(user_role), start=1):
         print(f" {idx}. {option}")
+    print(f" {idx}. Log out")
+    user_input = input("Enter your option: ")
 
 def load_sample_users(filename):
     users = []
@@ -29,8 +31,7 @@ def encrypt_password(password: str):
 
 def sign_up():
     # while True:
-    print("-"*50)
-    print("Sign up: ")
+    print("-"*50, "\nSign up: ")
     name = input("Enter your name: ")
     for available_roles in MENU_AND_ROLE.keys():
         print(f"- {available_roles}")
@@ -48,34 +49,26 @@ def sign_up():
         print("One of the inputted values were not a valid input.")
 
 def log_in():
-    print("-"*50)
-    print("Log in: ")
-    
+    print("-"*50, "\nLog in: ")    
     username = input("Enter your username: ")
     password = getpass.getpass("Enter your password (Hidden for security): ")
     with open(PASSWORDS, "r") as file:
-        content = file.read()
-        stored_name = content.split(',')[0].split(':')[1].strip()
-        stored_username = content.split(',')[1].split(':')[1].strip()
-        stored_role = content.split(',')[2].split(':')[1].strip()
-        stored_password_hash = content.split(',')[3].split(':')[1].strip()
+        for line in file:
+            stored_name, stored_username,stored_role, stored_password_hash = line.strip().split(",")
 
-        if username == stored_username:
-            if bcrypt.checkpw(password.encode("utf-8"), stored_password_hash.encode("utf-8")):
-                print("ACCESS GRANTED!")
-                print("Login successful! Welcome %s" % stored_name)
-                justInvestMenu(stored_role)
-                return
-            else:
-                print("ACCESS DENIED!")
-                print("Incorrect password.")
+            if username == stored_username:
+                if bcrypt.checkpw(password.encode("utf-8"), stored_password_hash.encode("utf-8")):
+                    print("ACCESS GRANTED!\nLogin successful! Welcome %s" % stored_name)
+                    justInvestMenu(stored_role)
+                    return
+                else:
+                    print("ACCESS DENIED!\nIncorrect password.")
     print("Username not found.")
     return
 
 
 if __name__ == "__main__":
-    print("-" * 50)
-    print("Main Menu")
+    print("-" * 50, "\nMain Menu")
     while True:
         print("1. Sign up \n2. Log in ")
         choice = input("Enter your choice (1, 2): ")
