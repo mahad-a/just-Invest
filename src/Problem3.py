@@ -6,7 +6,7 @@ import re
 
 PASSWORDS = "docs/passwd.txt"
 
-# password checker
+# PROBLEM 3b - password checker
 def is_password_valid(username: str, password: str):
     if password == username:
         print("Password cannot be the same as username")
@@ -51,8 +51,8 @@ def is_username_valid(username: str):
     print("Given username is valid!")
     return True
 
-
-def sign_up(): # sign up user interface
+# PROBLEM 3a - sign up user interface
+def sign_up(): 
     print("-"*50, "\nSign up: ")
     name = input("Enter your name: ")
     for available_roles in MENU_AND_ROLE.keys():
