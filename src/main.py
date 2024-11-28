@@ -10,19 +10,6 @@ def justInvestMenu(user_role):
     print(f" {idx}. Log out")
     user_input = input("Enter your option: ")
 
-def load_sample_users(filename):
-    users = []
-    with open(filename, 'r') as file:
-        for line in file:
-            name, role, username, password = line.strip().split(',')
-            users.append({
-                "Name": name, 
-                "Role": role,
-                "Username": username,
-                "Password": password
-            })
-    return users
-
 def encrypt_password(password: str):
     password_byte = password.encode("utf-8") # encode password in bytes
     hash_result = bcrypt.hashpw(password_byte, bcrypt.gensalt(rounds=10)) # hash the password and add salt

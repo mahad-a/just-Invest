@@ -47,26 +47,24 @@ def is_password_valid(username: str, password: str):
     if password == username:
         print("Password cannot be the same as username")
         return False
-    
-    if not (8 <= len(password) <= 12):
+    elif not (8 <= len(password) <= 12):
         print(f"Password must be between 8 and 12 characters long, your password is: {len(password)}")
         return False
-    
-    if not re.search(r'[A-Z]', password):  
+    elif not re.search("[A-Z]", password):  
         print("Password must contain at least one uppercase letter.")
         return False
-    if not re.search(r'[a-z]', password):  
+    elif not re.search("[a-z]", password):  
         print("Password must contain at least one lowercase letter.")
         return False
-    if not re.search(r'\d', password): 
+    elif not re.search("\d", password): 
         print("Password must contain at least one digit.")
         return False
-    if not re.search(r'[!@#$%*&]', password): 
+    elif not re.search("[!@#$%*&]", password): 
         print("Password must contain at least one special character from (!, @, #, $, %, *, &).")
         return False
-
-    print("Password Valid!")
-    return True 
+    else:
+        print("Password Valid!")
+        return True 
 
 def is_role_valid(role: str):
     case_insensitive = {key.lower(): value for key, value in MENU_AND_ROLE.items()}
