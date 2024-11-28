@@ -1,12 +1,42 @@
 import re
+from datetime import datetime
 
 # RBAC
 MENU_AND_ROLE = {
-    "Client": ["View account balance", "View investment portfolio", "View Finanical Advisor contact info"],
-    "Premium Client": ["Modify investment portfolio", "View Finanical Planner contact"],
-    "Financial Advisor": ["View Client's account balance", "View Client's investment portfolio", "Modify Client's investment portfolio", "View private consumer instruments"],
-    "Financial Planner": ["View Client's account balance", "View Client's investment portfolio", "Modify Client's investment portfolio", "View money market instruments", "View private consumer instruments"],
-    "Teller": ["View Client's account balance", "View Client's investment portfolio"],
+    "Client": [
+        "View account balance", 
+        "View investment portfolio", 
+        "View Finanical Advisor contact info"
+    ],
+    "Premium Client": [
+        "Modify investment portfolio", 
+        "View Finanical Planner contact"
+    ],
+    "Teller": [
+        "View Client's account balance", 
+        "View Client's investment portfolio"
+    ],
+    "Financial Advisor": [
+        "View Client's account balance", 
+        "View Client's investment portfolio", 
+        "Modify Client's investment portfolio", 
+        "View private consumer instruments"
+    ],
+    "Financial Planner": [
+        "View Client's account balance", 
+        "View Client's investment portfolio", 
+        "Modify Client's investment portfolio", 
+        "View money market instruments", 
+        "View private consumer instruments"
+    ],
+}
+
+ROLE_HIERARCHY = {
+    "Client": [],
+    "Premium Client": ["Client"],
+    "Teller": ["Client"],
+    "Financial Advisor": ["Teller"],
+    "Financial Planner": ["Financial Advisor"],
 }
 
 # text files
@@ -48,5 +78,17 @@ def is_role_valid(role: str):
         return False
 
 
-def access_permission(user_role, action):
-    return action in MENU_AND_ROLE.get(user_role)
+def can_access(user_role, action):
+    if user_role == "Teller" and not is_business_hours():
+        return "NO ACCESS OUTSIDE BUSINESS HOURS"
+    return action in get_access(user_role)
+
+def is_business_hours():
+    now = datetime.now()
+    return now.hour >= 9 and now.hour < 17 # between 9:00am and 5:00pm or 9:00 and 17:00
+
+def get_access(user_role):
+    access = set(MENU_AND_ROLE.get(user_role))
+    for inherited_access in ROLE_HIERARCHY.get(user_role):
+        access.update(get_access(inherited_access))
+    return access

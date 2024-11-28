@@ -5,7 +5,7 @@ import getpass
 def justInvestMenu(user_role):
 
     print("justInvest System\n", "-"*50, "\nOperations available on the system:")
-    for idx, option in enumerate(MENU_AND_ROLE.get(user_role), start=1):
+    for idx, option in enumerate(get_access(user_role), start=1):
         print(f" {idx}. {option}")
 
 def load_sample_users(filename):
