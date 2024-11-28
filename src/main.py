@@ -3,12 +3,21 @@ from checkers import *
 import getpass
 
 def justInvestMenu(user_role):
-
     print("justInvest System\n", "-"*50, "\nOperations available on the system:")
-    for idx, option in enumerate(get_access(user_role), start=1):
+    menu = list(get_access(user_role))
+    menu.append("Log out")
+    for idx, option in enumerate(menu, start=1):
         print(f" {idx}. {option}")
-    print(f" {idx}. Log out")
     user_input = input("Enter your option: ")
+    result = process_user_selection(user_input, len(menu))
+
+    if result:
+        selection = menu[result-1]
+        if selection == "Log out":
+            print("Logging out...")
+            main_menu()
+        print("ACCESS GRANTED TO %s" % selection)
+
 
 def encrypt_password(password: str):
     password_byte = password.encode("utf-8") # encode password in bytes
@@ -53,8 +62,7 @@ def log_in():
     print("Username not found.")
     return
 
-
-if __name__ == "__main__":
+def main_menu():
     print("-" * 50, "\nMain Menu")
     while True:
         print("1. Sign up \n2. Log in ")
@@ -69,4 +77,7 @@ if __name__ == "__main__":
         else:
             print("Invalid Input, try again. ")
 
+if __name__ == "__main__":
+    justInvestMenu("Client")
+    # main_menu()
         

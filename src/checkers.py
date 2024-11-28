@@ -90,3 +90,12 @@ def get_access(user_role):
     for inherited_access in ROLE_HIERARCHY.get(user_role):
         access.update(get_access(inherited_access))
     return access
+
+def process_user_selection(user_input, index):
+    while True:
+        if 0 < int(user_input) <= index:
+            print("Loading...")
+            return int(user_input)
+        else:
+            print("Invalid input, try again.")
+            user_input = input("Enter your option: ")
