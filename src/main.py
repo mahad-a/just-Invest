@@ -1,42 +1,83 @@
 import bcrypt
+from checkers import *
+import getpass
 
-MENU_AND_ROLE = {
-    "Client": ["View account balance", "View investment portfolio", "View Finanical Advisor contact info"],
-    "Premium Client": ["Modify investment portfolio", "View Finanical Planner contact"],
-    "Financial Advisor": ["View Client's account balance", "View Client's investment portfolio", "Modify Client's investment portfolio", "View private consumer instruments"],
-    "Financial Planner": ["View Client's account balance", "View Client's investment portfolio", "Modify Client's investment portfolio", "View money market instruments", "View private consumer instruments"],
-    "Teller": ["View Client's account balance", "View Client's investment portfolio"],
-}
-
-def justInvest(user_role):
+def justInvestMenu(user_role):
     print("justInvest System\n", "-"*50, "\nOperations available on the system:")
-    for idx, option in enumerate(MENU_AND_ROLE.get(user_role), start=1):
+    menu = list(get_access(user_role))
+    menu.append("Log out")
+    for idx, option in enumerate(menu, start=1):
         print(f" {idx}. {option}")
+    user_input = input("Enter your option: ")
+    result = process_user_selection(user_input, len(menu))
 
-def load_sample_users(filename):
-    users = []
-    with open(filename, 'r') as file:
+    if result:
+        selection = menu[result-1]
+        if selection == "Log out":
+            print("Logging out...")
+            main_menu()
+        print("ACCESS GRANTED TO %s" % selection)
+
+
+def encrypt_password(password: str):
+    password_byte = password.encode("utf-8") # encode password in bytes
+    hash_result = bcrypt.hashpw(password_byte, bcrypt.gensalt(rounds=10)) # hash the password and add salt
+    if bcrypt.checkpw(password_byte, hash_result):
+        return hash_result
+
+def sign_up():
+    # while True:
+    print("-"*50, "\nSign up: ")
+    name = input("Enter your name: ")
+    for available_roles in MENU_AND_ROLE.keys():
+        print(f"- {available_roles}")
+    role = input("Enter your role: ")
+    username = input("Enter your username: ")
+    password = getpass.getpass("Enter your password (Hidden for security): ")
+
+    if is_password_valid(username, password) and is_role_valid(role):
+        hashed_password = encrypt_password(password)
+        with open(PASSWORDS, 'a') as password_file:
+            password_file.write("Name: %s, Username: %s, Role: %s, Password: %s\n" % (name.title(), username, role.title(), hashed_password.decode("utf-8")))
+            justInvestMenu(role.title())
+            # break
+    else:
+        print("One of the inputted values were not a valid input.")
+
+def log_in():
+    print("-"*50, "\nLog in: ")    
+    username = input("Enter your username: ")
+    password = getpass.getpass("Enter your password (Hidden for security): ")
+    with open(PASSWORDS, "r") as file:
         for line in file:
-            name, role = line.strip().split(',')
-            users.append({
-                "Name": name, 
-                "Role": role
-            })
-    return users
+            stored_name, stored_username,stored_role, stored_password_hash = line.strip().split(",")
 
-def access_permission(user_role, action):
-    return action in MENU_AND_ROLE.get(user_role)
-    
+            if username == stored_username:
+                if bcrypt.checkpw(password.encode("utf-8"), stored_password_hash.encode("utf-8")):
+                    print("ACCESS GRANTED!\nLogin successful! Welcome %s" % stored_name)
+                    justInvestMenu(stored_role)
+                    return
+                else:
+                    print("ACCESS DENIED!\nIncorrect password.")
+    print("Username not found.")
+    return
+
+def main_menu():
+    print("-" * 50, "\nMain Menu")
+    while True:
+        print("1. Sign up \n2. Log in ")
+        choice = input("Enter your choice (1, 2): ")
+
+        if choice == "1":
+            sign_up()
+            break
+        elif choice == "2":
+            log_in()
+            break
+        else:
+            print("Invalid Input, try again. ")
 
 if __name__ == "__main__":
-    justInvest("Client")
-    users = load_sample_users('docs/sample.txt')
-    for user in users:
-        print(user)
-    print("-"*50)
-    password_example = input("Password: ")
-    password_byte = password_example.encode("utf-8")
-    hash = bcrypt.hashpw(password_byte, bcrypt.gensalt())
-    print(hash)
-    print(hash.decode("utf-8"))
-    print(bcrypt.checkpw(password_byte, hash))
+    justInvestMenu("Client")
+    # main_menu()
+        

@@ -1,0 +1,4 @@
+Test,tester,Teller,$2b$10$e1rRkP4UFhMIkCW7lx4P5OFefXeAp2HKRVVi54AopmX690GzH76HC
+Mahad,mahadahmed3,Financial Planner,$2b$10$uAP9L.euk2iyUU6t.a6IY.xo2.pclwUE4WsWLtWoXbNAYZVvWxw7i
+John,john1,Teller,$2b$10$.F66Rax.bKlmT3pI.bTlbON9uTjSCESvVjcoflSyw3bjz9Wbo935y
+Tel,teller1,Teller,$2b$10$Nxnxp7IeLIu1PakdTRlo9.kOSYKG/TjT4hxDejtjGTNP.8Abh6YJm
