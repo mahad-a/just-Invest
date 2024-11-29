@@ -2,3 +2,15 @@ Test,tester,Teller,$2b$10$e1rRkP4UFhMIkCW7lx4P5OFefXeAp2HKRVVi54AopmX690GzH76HC
 Mahad,mahadahmed3,Financial Planner,$2b$10$uAP9L.euk2iyUU6t.a6IY.xo2.pclwUE4WsWLtWoXbNAYZVvWxw7i
 John,john1,Teller,$2b$10$.F66Rax.bKlmT3pI.bTlbON9uTjSCESvVjcoflSyw3bjz9Wbo935y
 Tel,teller1,Teller,$2b$10$Nxnxp7IeLIu1PakdTRlo9.kOSYKG/TjT4hxDejtjGTNP.8Abh6YJm
+A,a,Premium Client,$2b$10$6aHmzSr/iLoUlfm4PU80eua9L75B60ytexl5C8EjZUEQpy99xZszq
+Io,io,Teller,$2b$10$9Ty8gbGA9Hab2qKERHvxherkYdN8s.t1BjDpTyC8i1qfkMHrz4FpO
+Sasha Kim,sashakim8,Client,$2b$10$PP86E.pARGcVHUHmfdRn3.FFPcq0tmOPD/QvcBe8StlHM1h4Q.3hm
+Emery Blake,emeryblake3,Client,$2b$10$s.BCUZCWsEcnzZQmV2d3tePtFsXAi4lrVVEkMbQwMPyOWsqQ/VAaK
+Noor Abbasi,noorabbasi8,Premium Client,$2b$10$zjHA4kTFOahhfI/PsET./.dfNCKLWXbkwuXbsiICnAO3i9Dn24142
+Zuri Adebayo,zuriadebayo2,Premium Client,$2b$10$yBOsoSKUTjfYOfXzv.5ntebuWvypWBf8NTMk8puU6De1cTnGKfoMK
+Mikael Chen,mikaelchen4,Financial Advisor,$2b$10$Hg7wLpx9odHEu8/rltew3ezLadPfBqA1.fXnrtffCKd9PKGZGCFsu
+Jordan Riley,jordanriley4,Financial Advisor,$2b$10$79ThKgIAa67h7W5MD5IEP.v1A6h/b//5iiD0xKWr0JjULVTOSCV/S
+Ellis Nakamura,ellisnakamura1,Financial Planner,$2b$10$7ftcrbWG616YxYLKcpkmQe0ZiWy8VA5CLb77CGujRv/76x3xfQjBC
+Harper Diaz,harperdiaz1,Financial Planner,$2b$10$NR56DjRQyGB3qfs2KRcV7.5912YPAoqZuHe5BvIoCCX70UPpONry.
+Alex Hayes,alexhayes9,Teller,$2b$10$QmhXob4WVCPxFXxZY8rGJu8wgAezhbAO/sdLzg2VMrbYvf53Iz1ye
+Adair Patel,adairpatel7,Teller,$2b$10$twFP3BU6iM52YufR26nYPOjRiZ8E8U9HvBE/3/xlkH37KYhUzSZ02

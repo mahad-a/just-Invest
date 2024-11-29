@@ -8,3 +8,15 @@ Ellis Nakamura, Financial Planner
 Harper Diaz, Financial Planner
 Alex Hayes, Teller
 Adair Patel, Teller
+
+----------------------------
+Sasha Kim with Username: sashakim8, Role: Client, Password: SKcli5!
+Emery Blake with Username: emeryblake3, Role: Client, Password: EBcli4%
+Noor Abbasi with Username: noorabbasi8, Role: Premium Client, Password: NApre9&
+Zuri Adebayo with Username: zuriadebayo2, Role: Premium Client, Password: ZApre6#
+Mikael Chen with Username: mikaelchen4, Role: Financial Advisor, Password: MCfin3&
+Jordan Riley with Username: jordanriley4, Role: Financial Advisor, Password: JRfin1#
+Ellis Nakamura with Username: ellisnakamura1, Role: Financial Planner, Password: ENfin6!
+Harper Diaz with Username: harperdiaz1, Role: Financial Planner, Password: HDfin5$
+Alex Hayes with Username: alexhayes9, Role: Teller, Password: AHtel3%
+Adair Patel with Username: adairpatel7, Role: Teller, Password: APtel8#
