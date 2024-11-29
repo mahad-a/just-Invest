@@ -5,11 +5,15 @@ import getpass
 import re
 
 PASSWORDS = "docs/passwd.txt"
+COMMON_PASSWORDS = "docs/common_passwords.txt"
 
-# password checker
+# PROBLEM 3b - password checker
 def is_password_valid(username: str, password: str):
     if password == username:
         print("Password cannot be the same as username")
+        return False
+    elif is_common_password(password, COMMON_PASSWORDS):
+        print("Password is too common. Please choose a stronger password.\nRecommended: 8-12 characters, one uppercase and lowercase letter and one special character (!, @, #, $, %, *, &)")
         return False
     elif not (8 <= len(password) <= 12):
         print(f"Password must be between 8 and 12 characters long, your password is: {len(password)}")
@@ -29,6 +33,12 @@ def is_password_valid(username: str, password: str):
     else:
         print("Password Valid!")
         return True 
+    
+# check if the password is common based on wikipedia's list of common passwords
+def is_common_password(password, common_password_file):
+    with open(common_password_file, 'r') as file:
+        common_passwords = set(file.read().strip().split(","))
+        return password in common_passwords
 
 # check if role exists
 def is_role_valid(role: str):
@@ -51,14 +61,15 @@ def is_username_valid(username: str):
     print("Given username is valid!")
     return True
 
-
-def sign_up(): # sign up user interface
+# PROBLEM 3a - sign up user interface
+def sign_up(): 
     print("-"*50, "\nSign up: ")
     name = input("Enter your name: ")
     for available_roles in MENU_AND_ROLE.keys():
         print(f"- {available_roles}")
     role = input("Enter your role: ")
     username = input("Enter your username: ")
+    print("Recommended: 8-12 characters, one uppercase and lowercase letter and one special character (!, @, #, $, %, *, &)")
     # hidden password input
     password = getpass.getpass("Enter your password (Hidden for security): ")
 
