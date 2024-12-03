@@ -14,3 +14,5 @@ Ellis Nakamura,ellisnakamura1,Financial Planner,$2b$10$7ftcrbWG616YxYLKcpkmQe0Zi
 Harper Diaz,harperdiaz1,Financial Planner,$2b$10$NR56DjRQyGB3qfs2KRcV7.5912YPAoqZuHe5BvIoCCX70UPpONry.
 Alex Hayes,alexhayes9,Teller,$2b$10$QmhXob4WVCPxFXxZY8rGJu8wgAezhbAO/sdLzg2VMrbYvf53Iz1ye
 Adair Patel,adairpatel7,Teller,$2b$10$twFP3BU6iM52YufR26nYPOjRiZ8E8U9HvBE/3/xlkH37KYhUzSZ02
+Ali,ali2003,Financial Advisor,$2b$10$UyoqDja1dydTSuwZeHoWbezTYHiqlgNHgzDMQ0ZvRVycXfogyeJYq
+Yassin,yassin2003,Financial Planner,$2b$10$Fcc6T06Ijv6wgKsO/RjxreVOJMW1LbD4MEbbOJOBH4iVU7m.jxp2S

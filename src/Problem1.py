@@ -76,18 +76,20 @@ def privileges(username, role):
 
 # the system menu once logged in
 def justInvestMenu(user_role):
-    print("justInvest System\n", "-"*50, "\nOperations available on the system:")
-    menu = list(get_access(user_role)) # convert from set to list
-    menu.append("Log out") # add log out option to list to ensure that its always last
-    for idx, option in enumerate(menu, start=1):
-        print(f" {idx}. {option}")
-    user_input = input("Enter your option: ")
-    result = process_user_selection(user_input, len(menu)) # process user's input for validation
+    while True:
+        print("justInvest System\n", "-"*50, "\nOperations available on the system:")
+        menu = list(get_access(user_role)) # convert from set to list
+        menu.append("Log out") # add log out option to list to ensure that its always last
+        for idx, option in enumerate(menu, start=1):
+            print(f" {idx}. {option}")
+        user_input = input("Enter your option: ")
+        result = process_user_selection(user_input, len(menu)) # process user's input for validation
 
-    if result:
-        selection = menu[result-1]
-        if selection == "Log out": # log out the user and return to main menu
-            print("Logging out...")
-            from main import main_menu # to avoid circular imports, only import main_menu when it needs to be used
-            main_menu()
-        print("ACCESS GRANTED TO %s" % selection)
+        if result:
+            selection = menu[result-1]
+            if selection == "Log out": # log out the user and return to main menu
+                print("Logging out...")
+                from main import main_menu # to avoid circular imports, only import main_menu when it needs to be used
+                main_menu()
+                break
+            print("ACCESS GRANTED TO %s" % selection)
