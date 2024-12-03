@@ -13,7 +13,7 @@ def log_in():
     username = input("Enter your username: ")
     password = getpass.getpass("Enter your password (Hidden for security): ")
     
-    found_account = get_account_from_file(username, password)
+    found_account = get_account_from_file(username, password) # checks the password file for the username and password
 
     if found_account:
         stored_name, stored_role = found_account

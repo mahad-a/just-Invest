@@ -9,7 +9,7 @@ Harper Diaz, Financial Planner
 Alex Hayes, Teller
 Adair Patel, Teller
 
-----------------------------
+---------------------------- Some accounts to be used for testing
 Sasha Kim with Username: sashakim8, Role: Client, Password: SKcli5!
 Emery Blake with Username: emeryblake3, Role: Client, Password: EBcli4%
 Noor Abbasi with Username: noorabbasi8, Role: Premium Client, Password: NApre9&
