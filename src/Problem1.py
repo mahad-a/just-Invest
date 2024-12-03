@@ -2,7 +2,7 @@ from datetime import datetime
 
 # PROBLEM 1a - selected RBAC as access control model
 MENU_AND_ROLE = {
-    "Client": [
+    "Client": [ # role and their available permissions
         "View account balance", 
         "View investment portfolio", 
         "View Finanical Advisor contact info"
@@ -62,10 +62,10 @@ def get_access(user_role):
 # process the user's input to ensure they put in a proper input
 def process_user_selection(user_input, index):
     while True:
-        if 0 < int(user_input) <= index:
+        if 0 < int(user_input) <= index: # user's input is a valid index
             print("Loading...")
             return int(user_input)
-        else:
+        else: # loop until the user gives up or enters a valid input
             print("Invalid input, try again.")
             user_input = input("Enter your option: ")
 
@@ -76,7 +76,7 @@ def privileges(username, role):
 
 # the system menu once logged in
 def justInvestMenu(user_role):
-    while True:
+    while True: # loop the menu as user navigates it
         print("justInvest System\n", "-"*50, "\nOperations available on the system:")
         menu = list(get_access(user_role)) # convert from set to list
         menu.append("Log out") # add log out option to list to ensure that its always last

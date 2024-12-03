@@ -1,7 +1,6 @@
 import getpass
 from Problem1 import justInvestMenu, privileges
 from Problem2 import get_account_from_file
-import bcrypt
 
 PASSWORDS = "docs/passwd.txt"
 

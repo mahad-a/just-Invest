@@ -1,5 +1,7 @@
 import bcrypt # chosen hashing function
 
+# source : https://www.geeksforgeeks.org/hashing-passwords-in-python-with-bcrypt/ 
+
 PASSWORDS = "docs/passwd.txt"
 
 # PROBLEM 2a - selection of hashing function
@@ -18,9 +20,10 @@ def update_password_file(username, name, role, password):
 # PROBLEM 2c (b) - retrieving users from password file, part of Problem4.py (log in)
 def get_account_from_file(username, password):
     with open(PASSWORDS, "r") as file:
-        for line in file:
+        for line in file: # look through each line in the password file for the username and password
             stored_name, stored_username, stored_role, stored_password_hash = line.strip().split(",")
             if username == stored_username:
+                # ensure password is the same as the hashed password
                 if bcrypt.checkpw(password.encode("utf-8"), stored_password_hash.encode("utf-8")):
                     return stored_name, stored_role
-    return None
+    return None # no account failed

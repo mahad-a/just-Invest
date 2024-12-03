@@ -4,6 +4,8 @@ from Problem2 import update_password_file
 import getpass
 import re
 
+# source : https://en.wikipedia.org/wiki/Wikipedia:10,000_most_common_passwords , https://www.geeksforgeeks.org/python-program-check-validity-password/
+
 PASSWORDS = "docs/passwd.txt"
 COMMON_PASSWORDS = "docs/common_passwords.txt"
 
@@ -12,7 +14,8 @@ def is_password_valid(username: str, password: str):
     if password == username:
         print("Password cannot be the same as username")
         return False
-    elif is_common_password(password, COMMON_PASSWORDS):
+    elif is_common_password(password, COMMON_PASSWORDS): 
+        # checks if password is part of top 10,000 common passwords
         print("Password is too common. Please choose a stronger password.\nRecommended: 8-12 characters, one uppercase and lowercase letter and one special character (!, @, #, $, %, *, &)")
         return False
     elif not (8 <= len(password) <= 12):
