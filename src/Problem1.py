@@ -34,7 +34,7 @@ MENU_AND_ROLE = {
 ROLE_HIERARCHY = { # organize roles by hierachy, with each inheriting lower roles
     "Client": [],
     "Premium Client": ["Client"],
-    "Teller": ["Client"],
+    "Teller": [],
     "Financial Advisor": ["Teller"],
     "Financial Planner": ["Financial Advisor"],
 }
